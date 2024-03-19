@@ -1,0 +1,40 @@
+---
+import MajorHighlights from "./data/MajorHighlights.astro"
+import TotalData from "./data/TotalData.astro"
+import LastEntry from "./data/LastEntry.astro"
+import MonthlyViews from "./data/MonthlyViews.astro"
+const data = Astro.props
+---
+<article class="relative flex flex-col items-stretch justify-start article-width scrollbar-hide rounded-2xl overflow-x-hidden ">
+    
+    <!-- current selection header -->
+    <div class="sticky top-0 pb-4 flex items-center justify-between border-b-[0.6667px] border-[#f6737350]">
+        <div class="flex flex-col items-start justify-center gap-1" style="width:calc(100% - 60px)">
+            <span class="text-2xl">Portfolio</span>
+            <a href={`https://${data}/`} class="text-xs truncate hover:underline hover:underline-offset-2 text-[#808080] hover:text-[#f6737373] transition-colors duration-200">portfolio.kushalkumarsaha.com</a>
+        </div>
+        <div class="flex gap-2 items-center justify-end">
+            <img src="download.svg" alt="" class="cursor-pointer hover:bg-[#ccc2] transition-all duration-300 p-3 rounded-full"/>
+            <img src="refresh.svg" alt="" class="cursor-pointer hover:bg-[#ccc2] transition-all duration-300 p-3 rounded-full"/>
+        </div>
+    </div>
+    <div class="overflow-y-scroll relative scrollbar-hide py-5">
+        <MonthlyViews/>
+        <MajorHighlights/>
+        <LastEntry/>
+        <TotalData/>
+    </div>  
+
+</article>
+
+<style>
+    .article-width {
+        max-width: calc(1280px - 308px);
+        width: calc(100dvw - 308px);
+        height:calc(100dvh - 256.5px);
+    }
+
+    @media (max-width:768px) {
+        .article-width{ width:100%; height:calc(100dvh - 346.5px); }
+    }
+</style>
