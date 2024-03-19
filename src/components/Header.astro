@@ -1,0 +1,40 @@
+---
+import { maxContentSpace } from "../constants/constants"
+import Logo from "./utils/Logo.astro"
+---
+<header class="mb-2 sticky top-0">
+    <nav class={`flex gap-2 items-center justify-center sm:justify-between px-4 md:px-8 py-2 md:py-3 text-lg ${maxContentSpace}`}>
+
+        <!-- left side -->
+        <a href="https://kushalkumarsaha.com/" target="_blank" class="wiggle-grp flex items-center justify-start gap-3 w-fit">
+            <Logo/> 
+            <div class="flex flex-col justify-center items-start w-fit">
+                <span class="hidden md:block text-[10px] tracking-[0.15em] text-[#f67373]">STATS</span>
+                <span class="wiggle-target font-medium tracking-wider md:mt-[-12px] pt-[7px] md:pt-0 text-3xl">Kushal Kumar</span>
+                <span class="block md:hidden mt-[-8.5px] text-[10px] tracking-[0.15em] text-[#f67373] self-end mr-[3px] md:mr-0">STATS</span>
+            </div>
+        </a>
+
+        <!-- right side -->
+        <div class="hidden md:flex gap-6 justify-end items-center *:cursor-pointer *:transition-all *:duration-300">
+            <a href="https://kushalkumarsaha.com/" target="_blank" class=" text-[15px] tracking-wider hover:text-[#f67373]">Official</a>
+            <a href="https://blogs.kushalkumarsaha.com/" target="_blank" class="text-[15px] tracking-wider hover:text-[#f67373]">Blogs</a>
+            <a href="https://portfolio.kushalkumarsaha.com/" target="_blank" class=" text-[15px] tracking-wider hover:text-[#f67373]">Portfolio</a>
+        </div>
+    </nav>
+</header>
+
+<style>
+    .wiggle-grp:hover .wiggle-target { 
+        animation: wiggleUp .7s linear;
+    }
+
+    @keyframes wiggleUp {
+        0%,100% {
+            transform: translateY(0);
+        }
+        45% {
+            transform: translateY(-3px);
+        }
+    }
+</style>
