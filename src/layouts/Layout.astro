@@ -1,0 +1,70 @@
+---
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+import BgTopSvg from "../components/utils/BgTopSvg.astro"
+import BgBottomSvg from "../components/utils/BgBottomSvg.astro"
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<BgTopSvg/>
+		<Header/>
+		<slot />
+		<Footer/>
+		<BgBottomSvg/>
+	</body>
+</html>
+
+
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: "Outfit";
+  		font-weight: 400;
+  		font-style: normal;
+		color: #ededed;
+		scroll-behavior: smooth;
+	}
+	body {
+		min-height: 100dvh;
+	}
+	html {
+		background: #121212;
+		min-height: 100dvh;
+		min-width: 100%;
+	}
+	
+	.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+	.main { height: calc(100dvh - 256px); }
+
+	@media (max-width:768px) {
+		.main { height: auto; }
+	}
+</style>
