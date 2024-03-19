@@ -1,0 +1,41 @@
+---
+const data = Astro.props
+const MONTHS:string[] = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+let VIEWS:number[] = [ 35, 27, 167, 0, 2, 0, 0, 27, 90, 382, 35, 117 ]
+        /* 
+        for( let i=0; i<VIEWS.length; i++)
+            VIEWS[i] = (MONTHS[i] in data) ? data[MONTHS[i]] : 0 */
+
+// get current month
+const index = new Date().getMonth()
+const currMonth = MONTHS[index]
+const currMonthViews = VIEWS[index]
+
+// remove curr month from full list
+MONTHS.splice(index,1)
+VIEWS.splice(index,1)
+
+// sort month list 
+let sortedList:object[] = [], noViewsList:object[] = []
+for( let i=0; i<VIEWS.length; i++ ) {
+    const month = MONTHS[i]
+    if(VIEWS[i]!==0)
+        sortedList.push([month,VIEWS[i]])
+    else
+        noViewsList.push([month,VIEWS[i]])
+}
+sortedList = [ ...sortedList, ...noViewsList ]
+
+// console.table(sortedList)
+
+---
+<div class="flex items-center justify-start">
+    <div class="pr-[6px] md:pr-2 flex justify-start gap-[10px] items-center border-r-[1px] border-[#63636330]">
+        <span class="hidden md:block">Views</span>
+        <span class="py-2 px-4 bg-black whitespace-nowrap rounded-lg">{currMonth}: {currMonthViews}</span>
+    </div>
+
+    <div class="relative overflow-x-scroll pl-[6px] md:pl-2 flex gap-2 md:gap-3 items-center justify-start scrollbar-hide">
+        { VIEWS.map((view,index) => ( <span class="py-2 px-4 bg-black whitespace-nowrap rounded-lg">{MONTHS[index]}: {view}</span> )) }
+    </div>
+</div>
