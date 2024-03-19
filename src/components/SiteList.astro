@@ -1,0 +1,55 @@
+---
+interface SiteProps { name:string, subtitle:string, targetClassIndex:string }
+type SitesProps = SiteProps[]
+
+const sites:SitesProps = [
+    { name: "Blogs", subtitle:"blogs.kushalkumarsaha.com", targetClassIndex:"blogs" },
+    { name: "Services", subtitle:"services.kushalkumarsaha.com", targetClassIndex:"services" },
+    { name: "Official", subtitle:"kushalkumarsaha.com", targetClassIndex:"" },
+    // { name: "Portfolio", subtitle:"portfolio.kushalkumarsaha.com", targetClassIndex:"" },
+    { name: "ShopSphere", subtitle:"shopsphere.kushalkumarsaha.com", targetClassIndex:"" },
+    { name: "Ed.Line", subtitle:"edline.kushalkumarsaha.com", targetClassIndex:"" },
+    { name: "Minify", subtitle:"minify.kushalkumarsaha.com", targetClassIndex:"" },
+    { name: "API-Fetch", subtitle:"apifetch.kushalkumarsaha.com", targetClassIndex:"" },
+    { name: "Fireworks", subtitle:"fireworks.kushalkumarsaha.com", targetClassIndex:"" },
+]
+
+// <a href={`https://${site.subtitle}/`} target="_blank" class="hidden group-hover/asideTag:block hover:underline text-sm group-hover/asideTag:text-[#f09393]">{site.subtitle}</a> 
+---
+<aside class="main group/list scrollbar-hide flex md:flex-col md:w-[220px] gap-2 items-center md:items-stretch justify-start overflow-x-scroll md:overflow-x-auto md:overflow-y-scroll *:px-4 *:py-3 *:font-semibold *:rounded-lg *:flex *:w-full *:items-center *:justify-between *:duration-200 *:cursor-pointer *:tracking-wide">
+    <div class="active-aside group/asideTag xyz hover:bg-[#6f6f6f35] transition-all duration-300" data-target-info="">
+        <span class=" flex flex-col items-start justify-center transition-all duration-300">
+            <span class="group-hover/asideTag:text-[#f09393] transition-all duration-200 whitespace-nowrap">Portfolio</span>
+        </span>
+        <span class="transition-all -translate-x-2 opacity-0 group-hover/asideTag:opacity-100 group-hover/asideTag:translate-x-0 "><img src="chevron_right.svg" alt=""/></span>
+    </div>
+
+    { sites.map((site,index) => (
+        <div class="group/asideTag xyz hover:bg-[#6f6f6f35] transition-all duration-300" data-target-info={site.targetClassIndex}>
+            <span class=" flex flex-col items-start justify-center transition-all duration-300">
+                <span class="group-hover/asideTag:text-[#f09393] transition-all duration-200 whitespace-nowrap">{site.name}</span>
+            </span>
+            <span class="transition-all -translate-x-2 opacity-0 group-hover/asideTag:opacity-100 group-hover/asideTag:translate-x-0 "><img src="chevron_right.svg" alt=""/></span>
+        </div>
+    )) }
+</aside>
+
+<style>
+    .active-aside{ 
+        background: #f6737365;
+    }
+    .active-aside span:nth-child(2) {
+        opacity: 1;
+        transform: translateX(0);
+    }
+</style>
+
+<script>
+
+    document.querySelectorAll(".xyz").forEach(el => el.addEventListener('click', (e) => { 
+        
+        
+
+    }))
+
+</script>
