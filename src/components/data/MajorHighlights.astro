@@ -1,59 +1,14 @@
 ---
-// const { topCountries, topCities, topBrowsers, topDevices, topTimeRanges, topPlatforms } = Astro.props
-const topCities = [
-    { city:"New Delhi",      views:30    },
-    { city:"Varanasi",       views:12    },
-    { city:"Washington",     views:7     },
-    { city:"Kolkata",        views:2     },
-]
-
-const topCountries = [
-    { country:"New Delhi",      views:30    },
-    { country:"Varanasi",       views:12    },
-    { country:"Washington",     views:7     },
-    { country:"Kolkata",        views:2     },
-]
-
-const topBrowsers = [
-    { browser:"Safari",     views:30    },
-    { browser:"Edge",       views:12    },
-    { browser:"Chrome",     views:7     },
-]
-
-const topTimeRanges = [
-    { daytype:"Morning",        views:30    },
-    { daytype:"Evening",        views:7     },
-    { daytype:"Night",          views:2     },
-    { daytype:"Late night",     views:2     },
-]
-
-// ------------------------------------------------
-
-const topDates = [
-    { date:"iPhone",      views:30    },
-    { date:"Varanasi",       views:12    },
-    { date:"Washington",     views:7     },
-    { date:"Kolkata",        views:2     },
-]
-
-
-const topPlatforms = [
-    { platform:"Mac",      views:30    },
-    { platform:"Linux",      views:30    },
-    { platform:"Windows",       views:12    },
-    { platform:"iPhone",     views:7     },
-    // { platform:"Android",        views:2     },
-    // { platform:"Tablet",        views:2     },
-    // { platform:"iPad",        views:2     },
-]
+const { topCities, topCountries, topBrowsers, topTimeRanges, topDates, topPlatforms } = Astro.props
+const capitalize = (str:string) => { return (str[0].toUpperCase() + str.slice(1)) }
 ---
 
 <section class="mt-4 mb-6 pt-2 flex flex-wrap md:flex-wrap gap-3 justify-stretch items-stretch *:min-w-full *:md:min-w-[310px] *:rounded-lg *:bg-[#2e2e2e40] *:py-4 *:px-5 *:flex-1 *:transition-colors *:duration-300 *:cursor-pointer *:flex *:flex-col *:md:flex-row *:items-center *:justify-stretch *:gap-4 *:md:gap-10">
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Country</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topCountries.map( country => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{country.country}</span><span>{country.views}</span> </span>
+            {Object.entries(topCountries).map( ([key,val]) => (
+                (parseInt(val as string) > 0 && key!=='null') ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
@@ -62,28 +17,31 @@ const topPlatforms = [
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">City</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topCities.map( city => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{city.city}</span><span>{city.views}</span> </span>
+            {Object.entries(topCities).map( ([key,val]) => (
+                (parseInt(val as string) > 0 && key!=='null') ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
+    
+<!-- trying to write a comment while a moron takes video for upword 
+    portfolio and having no idea about the end result just blindly follwing instructions
+shubham ka job ahemdabaad me laga hai aur wo Gurjrat me hai ab aur kitna likhna hoga pata nhi  -->
 
     
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Browser</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topBrowsers.map( browser => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{browser.browser}</span><span>{browser.views}</span> </span>
+            {Object.entries(topBrowsers).map( ([key,val]) => (
+                parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
 
-    
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Time</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topTimeRanges.map( time => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{time.daytype}</span><span>{time.views}</span> </span>
+            {Object.entries(topTimeRanges).map( ([key,val]) => (
+                parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{capitalize(key)}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
@@ -92,8 +50,8 @@ const topPlatforms = [
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Date</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topDates.map( date => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{date.date}</span><span>{date.views}</span> </span>
+            {Object.entries(topDates).map( ([key,val]) => (
+                parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
@@ -102,8 +60,8 @@ const topPlatforms = [
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Platform</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {topPlatforms.map( platform => (
-                <span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{platform.platform}</span><span>{platform.views}</span> </span>
+            {Object.entries(topPlatforms).map( ([key,val]) => (
+                parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>

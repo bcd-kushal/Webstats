@@ -1,10 +1,10 @@
 ---
-const data = Astro.props
+const { data } = Astro.props
 const MONTHS:string[] = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
-let VIEWS:number[] = [ 35, 27, 167, 0, 2, 0, 0, 27, 90, 382, 35, 117 ]
-        /* 
-        for( let i=0; i<VIEWS.length; i++)
-            VIEWS[i] = (MONTHS[i] in data) ? data[MONTHS[i]] : 0 */
+let VIEWS:number[] = [ 0,0,0,  0,0,0,  0,0,0,  0,0,0 ]
+
+for( let i=0; i<VIEWS.length; i++)
+    VIEWS[i] = (data && (i < MONTHS.length)) ? (Object.prototype.toString.call(data[i]==='[object Number]'))? data[i] : 0 : 0
 
 // get current month
 const index = new Date().getMonth()
