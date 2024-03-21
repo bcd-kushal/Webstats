@@ -9,7 +9,7 @@ const sites:SitesProps = SITES_LIST
 
 ---
 <aside class="main group/list scrollbar-hide flex md:flex-col md:w-[220px] gap-2 items-center md:items-stretch justify-start overflow-x-scroll md:overflow-x-auto md:overflow-y-scroll *:px-4 *:py-3 *:font-semibold *:rounded-lg *:flex *:w-full *:items-center *:justify-between *:duration-200 *:cursor-pointer *:tracking-wide">
-    { sites.map((site,index) => (
+    { sites.map(site => (
         <div class="group/asideTag site-tab hover:bg-[#6f6f6f35] transition-all duration-300" data-target-info={site.targetClassIndex}>
             <span class=" flex flex-col items-start justify-center transition-all duration-300">
                 <span class="group-hover/asideTag:text-[#f09393] transition-all duration-200 whitespace-nowrap site-name">{site.name}</span>
@@ -43,15 +43,15 @@ const sites:SitesProps = SITES_LIST
     }
 
 
-    document.querySelectorAll(".site-tab").forEach(el => el.addEventListener('click', (e) => { 
+    document.querySelectorAll(".site-tab").forEach(el => el.addEventListener('click', () => { 
         const site = el.querySelector(".site-name")
-        el.classList.contains("active-aside") ? "" : el.classList.add("active-aside")
-        prevActiveAside.classList.contains("active-aside") ? prevActiveAside.classList.remove("active-aside") : ""
-        prevActiveAside = el
-
-
-
-
+        if(el!==prevActiveAside) {
+            el.classList.contains("active-aside") ? "" : el.classList.add("active-aside")
+            prevActiveAside.classList.contains("active-aside") ? prevActiveAside.classList.remove("active-aside") : ""
+            prevActiveAside = el
+        }
+        
+        
         // STATS BOX SWITCH ---------------------------------------------------------------
         const getTargetStatsBoxElement = (target:string) => {
             const allBoxes = document.querySelectorAll(".stats-box")
@@ -62,11 +62,15 @@ const sites:SitesProps = SITES_LIST
         }
         const targetBoxDataValue = site.textContent.toLowerCase()
         const targetStatsBox = getTargetStatsBoxElement(targetBoxDataValue)
-        targetStatsBox.setAttribute("data-active","true");
-        prevActiveStatsBox.setAttribute("data-active","false");
-        (targetStatsBox as HTMLElement).style.display = "flex";
-        (prevActiveStatsBox as HTMLElement).style.display = "none";
-        prevActiveStatsBox = targetStatsBox
+        if(targetStatsBox!==prevActiveStatsBox){
+            targetStatsBox.setAttribute("data-active","true");
+            prevActiveStatsBox.setAttribute("data-active","false");
+            (targetStatsBox as HTMLElement).style.display = "flex";
+            (prevActiveStatsBox as HTMLElement).style.display = "none";
+            prevActiveStatsBox = targetStatsBox
+        }
+
+        
 
     }))
 

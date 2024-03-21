@@ -4,32 +4,30 @@ import SiteList from '../components/SiteList.astro'
 import StatsBox from '../components/StatsBox.astro'
 import { maxContentSpace } from '../constants/constants'
 import { readSupabase } from '../constants/readSupa'
-import { getMonthlyViews } from "../constants/shapingData/getMonthlyViews"
 import { getCleanData } from "../constants/shapingData/getCleanData"
-import { getHighlightsData } from "../constants/shapingData/getHighlightsData"
+import { getUsefulFormattedData } from "../constants/shapingData/getHighlightsData"
 import { SITES_LIST } from '../constants/data/data'
 
-let fullData = {}
 let trafficData = {}
-
-for(let i=0;i<SITES_LIST.length;i++){
-	const lowerCaseName = SITES_LIST[i].name.toLowerCase()
-	fullData[lowerCaseName] = await readSupabase({tableName:`traffic-${lowerCaseName}`})
-}
-
 
 for(let i=0;i<SITES_LIST.length;i++) {
 	const name = SITES_LIST[i].name 
 	const lowerCaseName = name.toLowerCase()
+	const dbData = await readSupabase({tableName:`traffic-${lowerCaseName}`})
+
+	const usefulData = await getUsefulFormattedData(dbData as any[])
+
 	trafficData[lowerCaseName] = {
 		title: name,
 		link: SITES_LIST[i].subtitle,
-		monthlyViews: await getMonthlyViews(fullData[lowerCaseName] as any),
-		highlightsData: await getHighlightsData(fullData[lowerCaseName] as any),
-		allData: await getCleanData(fullData[lowerCaseName] as any),
+		monthlyViews: usefulData.monthsViews,
+		highlightsData: usefulData.highlights,
+		allData: await getCleanData(dbData as any),
 		dataAttrVal: lowerCaseName
 	}
 }
+
+
 
 ---
 
@@ -50,3 +48,12 @@ for(let i=0;i<SITES_LIST.length;i++) {
 		</main>
 	</div>
 </MainLayout>
+
+
+<script>
+	const ascii_banner = "%c\n   __ __            __         __  __ __\n  / //_/__ __ ___  / /  ___ _ / / / //_/__ __ __ _  ___ _ ____\n / ,<  / // /(_-< / _ \\/ _ `// / / ,<  / // //  ' \\/ _ `// __/\n/_/|_| \\_,_//___//_//_/\\_,_//_/ /_/|_| \\_,_//_/_/_/\\_,_//_/\n \n\n %cwelcomes you, fellow programmer. \n"
+	const links = "Check me out here:\n\n%c • GitHub: https://github.com/bcd-kushal/\n%c • Portfolio: https://portfolio.kushalkumarsaha.com/\n%c • LinkedIn: https://linkedin.com/in/dev-kushal/\n%c • Email: dev@kushalkumarsaha.com\n\n" 
+
+	console.log(ascii_banner, 'color: #f07373', 'color: #fff')
+	console.log(links, 'color: #fff', 'color: #fff', 'color: #fff', 'color: #fff')
+</script>

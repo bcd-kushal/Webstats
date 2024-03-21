@@ -5,7 +5,7 @@ dotenv.config()
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 
 export async function readSupabase({tableName}:{tableName:string}) {
-    const DB_TABLES = ["portfolio-mails","traffic-portfolio","traffic-services"]
+    const DB_TABLES = ["portfolio-mails","traffic-portfolio","traffic-services","traffic-stats"]
     const LIMIT = 200
     const REQUIRED_TABLE_COLUMNS = ["date","time","country","region","city","org","network","platform","height","width","aspect","is_mobile","cpu_cores","browser","battery","architecture","model"]
     

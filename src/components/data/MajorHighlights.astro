@@ -1,5 +1,54 @@
 ---
 const { topCities, topCountries, topBrowsers, topTimeRanges, topDates, topPlatforms } = Astro.props
+
+async function mergeSortDescendingWithLimit(obj:object, limit:number) {
+    const entries = Object.entries(obj)
+
+    function merge(left, right) {
+        let result = []
+        let leftIndex = 0
+        let rightIndex = 0
+
+        while (leftIndex < left.length && rightIndex < right.length) {
+            if (left[leftIndex][1] > right[rightIndex][1]) {
+                result.push(left[leftIndex]);
+                leftIndex++
+            } else {
+                result.push(right[rightIndex])
+                rightIndex++
+            }
+        }
+
+        return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex))
+    }
+
+    function mergeSortRec(arr) {
+        if (arr.length <= 1) 
+            return arr
+        const mid = Math.floor(arr.length / 2)
+        const left = arr.slice(0, mid)
+        const right = arr.slice(mid)
+
+        return merge( mergeSortRec(left), mergeSortRec(right) )
+    }
+
+    const sortedEntries = mergeSortRec(entries)
+    const truncatedEntries = sortedEntries.slice(0, limit) 
+    const sortedObject = Object.fromEntries(truncatedEntries)
+    return sortedObject
+}
+
+const LIMIT = 5
+
+const cities = await mergeSortDescendingWithLimit(topCities, LIMIT)
+const countries = await mergeSortDescendingWithLimit(topCountries, LIMIT)
+const browsers = await mergeSortDescendingWithLimit(topBrowsers, LIMIT)
+const timeranges = await mergeSortDescendingWithLimit(topTimeRanges, LIMIT)
+const dates = await mergeSortDescendingWithLimit(topDates, LIMIT)
+const platforms = await mergeSortDescendingWithLimit(topPlatforms, LIMIT)
+
+
+
 const capitalize = (str:string) => { return (str[0].toUpperCase() + str.slice(1)) }
 ---
 
@@ -7,31 +56,27 @@ const capitalize = (str:string) => { return (str[0].toUpperCase() + str.slice(1)
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Country</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topCountries).map( ([key,val]) => (
+            {Object.entries(countries).map( ([key,val]) => (
                 (parseInt(val as string) > 0 && key!=='null') ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
 
     
-    <div class="hover:bg-[#f6737322] group/tab">
+    <div class="hover:bg-[#f6737322] group/tab"> 
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">City</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topCities).map( ([key,val]) => (
+            {Object.entries(cities).map( ([key,val]) => (
                 (parseInt(val as string) > 0 && key!=='null') ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
     </div>
-    
-<!-- trying to write a comment while a moron takes video for upword 
-    portfolio and having no idea about the end result just blindly follwing instructions
-shubham ka job ahemdabaad me laga hai aur wo Gurjrat me hai ab aur kitna likhna hoga pata nhi  -->
 
     
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Browser</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topBrowsers).map( ([key,val]) => (
+            {Object.entries(browsers).map( ([key,val]) => (
                 parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
@@ -40,7 +85,7 @@ shubham ka job ahemdabaad me laga hai aur wo Gurjrat me hai ab aur kitna likhna 
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Time</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topTimeRanges).map( ([key,val]) => (
+            {Object.entries(timeranges).map( ([key,val]) => (
                 parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{capitalize(key)}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
@@ -50,7 +95,7 @@ shubham ka job ahemdabaad me laga hai aur wo Gurjrat me hai ab aur kitna likhna 
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Date</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topDates).map( ([key,val]) => (
+            {Object.entries(dates).map( ([key,val]) => (
                 parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>
@@ -60,7 +105,7 @@ shubham ka job ahemdabaad me laga hai aur wo Gurjrat me hai ab aur kitna likhna 
     <div class="hover:bg-[#f6737322] group/tab">
         <div class="self-start md:self-center text-2xl md:max-w-[40%] mb-1 md:mb-0 group-hover/tab:text-[#f67373] transition-colors duration-300">Platform</div>
         <div class="flex flex-col gap-1 items-stretch justify-center w-full">
-            {Object.entries(topPlatforms).map( ([key,val]) => (
+            {Object.entries(platforms).map( ([key,val]) => (
                 parseInt(val as string) > 0 ?  (<span class="flex justify-between w-full *:text-[#fff7] *:hover:text-white *:transition-colors *:duration-300"> <span>{key}</span><span>{val}</span> </span>) : <span class="hidden"></span>
             ))}
         </div>

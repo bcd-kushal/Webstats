@@ -1,11 +1,13 @@
-interface DataType  { name:string, views:number }
 interface HighlightDataProps { 
-    cities: object,
-    countries:  object,
-    browsers: object,
-    timeRanges: object,
-    dates: object,
-    platforms: object
+    highlights: {
+        cities: object,
+        countries:  object,
+        browsers: object,
+        timeRanges: object,
+        dates: object,
+        platforms: object,
+    },
+    monthsViews: number[]
 }
 export interface DataProps {
     city:string|null,
@@ -35,41 +37,38 @@ async function getTimeslot(timestr:string):Promise<TimeSlotType> {
     return 'overnight'
 }
 
-async function getBackCleanFormattedData(data:object):Promise<DataType[]> {
-    const arr = Object.entries(data)
-    let res = []
-
-    for(let i=0;i<arr.length;i++) {
-        const name = arr[i][0]
-        const view = parseInt(arr[i][1])
-        res.push({ name:name, views:view })
-    }
-
-    return(res)
-}
 
 
+const MONTHS = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
 
 
-
-export const getHighlightsData = async (data:DataProps[]): Promise<HighlightDataProps> => {
+export const getUsefulFormattedData = async (data:DataProps[]): Promise<HighlightDataProps> => {
     let cityCount = {}, countryCount = {}, browserCount = {}, rangeCount = {}, dateCount = {}, platformCount = {}
+    let monthsViews = [0,0,0, 0,0,0, 0,0,0, 0,0,0]
 
     for(let i=0;i<data.length;i++) {
 
+        // count monthly views =======================================
+        const month = data[i]['date'].substr(3,3)
+        if(MONTHS.includes(month))
+            monthsViews[MONTHS.indexOf(month)] += 1
+
+        
         // count city ==============================================
         const city = data[i].city
-        cityCount[city] = (city in cityCount) ? 1+cityCount[city] : 0
+        cityCount[city] = (city in cityCount) ? 1+cityCount[city] : 1
         
 
         // count country ==============================================
         const country = data[i].country
-        countryCount[country] = (country in countryCount) ? 1+countryCount[country] : 0
+        countryCount[country] = (country in countryCount) ? 1+countryCount[country] : 1
      
 
         // count browser ==============================================
-        const browser = data[i].browser
-        browserCount[browser] = (browser in browserCount) ? 1+browserCount[browser] : 0
+        let browser = data[i].browser
+        if(browser==='null' || browser==='Not?A_Brand' || browser==='' || browser===null || browser===undefined)     browser = 'Others'
+        browserCount[browser] = (browser in browserCount) ? 1+browserCount[browser] : 1
+
 
 
         // count platform ==============================================
@@ -95,31 +94,35 @@ export const getHighlightsData = async (data:DataProps[]): Promise<HighlightData
             else                              actualModel = 'Linux PC'
         }
         
-        platformCount[actualModel] = (actualModel in platformCount) ? 1+platformCount[actualModel] : 0
+        platformCount[actualModel] = (actualModel in platformCount) ? 1+platformCount[actualModel] : 1
         
 
 
         // count dates ==============================================
         const date = data[i].date.substring(0,6)
-        dateCount[date] = (date in dateCount) ? 1+dateCount[date] : 0
+        dateCount[date] = (date in dateCount) ? 1+dateCount[date] : 1
 
 
         // count time range =========================================
         const time = data[i].time
         const timeslot = await getTimeslot(time)
 
-        rangeCount[timeslot] = (timeslot in rangeCount) ? 1+rangeCount[timeslot] : 0
+        rangeCount[timeslot] = (timeslot in rangeCount) ? 1+rangeCount[timeslot] : 1
 
     }
     
 
     return ({
-        cities: cityCount,
-        countries: countryCount,
-        browsers: browserCount,
-        timeRanges: rangeCount,
-        dates: dateCount,
-        platforms: platformCount,
+        highlights: {
+            cities: cityCount,
+            countries: countryCount,
+            browsers: browserCount,
+            timeRanges: rangeCount,
+            dates: dateCount,
+            platforms: platformCount,
+        },
+        
+        monthsViews: monthsViews,
     })
 
 }
