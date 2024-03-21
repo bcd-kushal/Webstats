@@ -12,10 +12,10 @@ https://stats.kushalkumarsaha.com/
 
 ## :sparkles: Features
 
-- **Location-wise analysis:** Beautify your console output by using decorators to highlight, format and structure data.
-- **Network-wise analysis:** A collection of important templates to get started with, to put aside the worry of its UI.
-- **Device-wise analysis:** A collection of icons to use in your console scripts or outputs.
-- **Device-essentials audit:** A collection of icons to use in your console scripts or outputs.
+- **Location-wise analysis:** `Continent`, `Country`, `Region`, `City`, `Zip`, `Latitude`, `Longitude`
+- **Network-wise analysis:** `Latency`, `Bandwidth`
+- **Device-wise analysis:** `iPhone`, `iPad`, `Mac PC`, `Macbook`, `Android phone`, `Android tablet`, `Windows`, `Linux`
+- **Device-essentials audit:** `Dimensions`, `Battery`, `RAM`
 
 <hr>
 
@@ -35,5 +35,4 @@ This project is licensed under the MIT License - see the <a href=''>LICENSE</a> 
 
 <hr>
 
-© 2024 dev-kushalkumar
-
+<h3><img title="Kushal-Kumar" width="17" src="https://github.com/bcd-kushal/bcd-kushal/blob/main/icons/dark/filled/kushalkumar_bg_dark.png"/>&nbsp;Kushal Kumar 2024 • All rights reserved </h3>
