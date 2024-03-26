@@ -1,0 +1,12 @@
+.article-width {
+  max-width: calc(1280px - 308px);
+  width: calc(100dvw - 308px);
+  height: calc(100dvh - 256.5px);
+}
+
+@media (max-width: 768px) {
+  .article-width {
+    width: 100%;
+    height: calc(100dvh - 346.5px);
+  }
+}
