@@ -53,6 +53,17 @@ export interface StatsContainerType {
     highlightsData: any
 }
 
-export type AccordionType        = { title:string, children:ChildrenType }
+interface TrafficDataObjectType {
+    title: string,
+    link: string, 
+    highlightsData: object,
+    allData: null,
+    dataAttrVal: string,
+    monthlyViews: number[]
+}
+
+export type TrafficDataType     = { [key:string]: TrafficDataObjectType }
+
+export type AccordionType       = { title:string, children:ChildrenType }
 // svgs =====================
 export type SVGType             = { className?:ClassNameType, dimensions?: number|string, fill?:string, stroke?:string }
