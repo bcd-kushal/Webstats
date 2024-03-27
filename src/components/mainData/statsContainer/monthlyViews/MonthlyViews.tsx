@@ -1,8 +1,8 @@
 'use server'
-import { MONTHS } from "@/data/months"
 
 export async function MonthlyViews({data}: {data:number[]}) {
 
+    const MONTHS = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
     let VIEWS: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     for (let i = 0; i < VIEWS.length; i++)
@@ -37,7 +37,7 @@ export async function MonthlyViews({data}: {data:number[]}) {
             </div>
 
             <div className="relative overflow-x-scroll pl-[6px] md:pl-2 flex gap-2 md:gap-3 items-center justify-start scrollbar-hide">
-                {VIEWS.map((view, index) => (<span className="py-2 px-4 bg-[#0007] whitespace-nowrap rounded-lg hover:text-[#f67373] hover:bg-[#f6737311] transition-colors cursor-default duration-300" key={index}>{MONTHS[index]}: {view}</span>))}
+                {VIEWS.map((view, index) => (<span className="py-2 px-4 bg-[#0007] whitespace-nowrap rounded-lg hover:text-[#f67373] hover:bg-[#f6737309] border-[1px] border-transparent hover:border-[#f6737330] transition-all cursor-default duration-300" key={index}>{MONTHS[index]}: {view}</span>))}
             </div>
         </div>
     )
