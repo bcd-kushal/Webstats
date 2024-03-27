@@ -10,7 +10,7 @@ export const Header = async () => {
             <nav className={`flex gap-2 items-center justify-center sm:justify-between px-4 md:px-8 py-2 md:py-3 text-lg ${maxContentSpace}`} >
 
                 {/* left side ---------------------- */}
-                <Link href="https://kushalkumarsaha.com/" target="_blank" className="wiggle-grp flex items-center justify-start gap-3 w-fit">
+                <Link href="/"  className="wiggle-grp flex items-center justify-start gap-3 w-fit">
                     <KushalKumarBgWebstatsSvg/>
                     <div className="flex flex-col justify-center items-start w-fit">
                         <span className="hidden md:block text-[10px] tracking-[0.15em] text-[#f67373]">STATS</span>

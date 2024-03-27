@@ -1,5 +1,6 @@
 'use server'
 import { Accordion } from "@/components/templates/Accordion"
+import { EveningSvg, LateNightSvg, MorningSvg, NightSvg } from "@/svgs/svgs"
 
 const countryStats = [
     {
@@ -65,12 +66,12 @@ export async function TotalData() {
                         {/* left side --------------------------------------- */}
                         <article className="min-w-[180px]">
                             {/* continent grouping ------------------ */}
-                            {countryStats.map(continent => (
-                                <div className="group/continent flex flex-col gap-1 items-stretch justify-start mt-5">
+                            {countryStats.map((continent,index) => (
+                                <div className="group/continent flex flex-col gap-1 items-stretch justify-start mt-5" key={index}>
                                     <span className=" text-[10px] tracking-[0.16em] text-[#f67373] *:tracking-[0.16em] *:text-[#f67373] flex justify-between">{continent.continent.toUpperCase()} <span className="group-hover/continent:opacity-100 opacity-0 transition-opacity duration-300">{continent.total}</span></span>
                                     <section className="pl-3 *:leading-relaxed">
-                                        {continent.data.map(country => (
-                                            <div className="flex justify-between items-start *:duration-300 *:transition-colors *:hover:text-[#f67373]">
+                                        {continent.data.map((country,inner_index) => (
+                                            <div className="flex justify-between items-start *:duration-300 *:transition-colors *:hover:text-[#f67373]" key={String(index)+String(inner_index)}>
                                                 <span>{country.country}</span>
                                                 <span>{country.views}</span>
                                             </div>
@@ -113,22 +114,22 @@ export async function TotalData() {
                         <div className="">
                             <div className="flex items-start justify-between mt-3 *:flex-1 *:aspect-square *:grid *:items-center *:h-full">
                                 <div className="">
-                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['320'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Morning'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <img src="timings/morning.svg" alt="" /> </span>
+                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['320'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Morning'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <MorningSvg/> </span>
                                     <span className="row-start-1 col-start-1 border-t-[1.5px]  border-[#fff3] w-1/2 left-1/2 relative"></span>
                                 </div>
 
                                 <div className="">
-                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['2081'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Evening'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <img src="timings/evening.svg" alt="" /> </span>
+                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['2081'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Evening'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <EveningSvg/> </span>
                                     <span className="row-start-1 col-start-1 border-t-[1.5px]  border-[#fff3] relative"></span>
                                 </div>
 
                                 <div className="">
-                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['202'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Night'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <img src="timings/night.svg" alt="" /> </span>
+                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['202'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Night'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <NightSvg/> </span>
                                     <span className="row-start-1 col-start-1 border-t-[1.5px]  border-[#fff3] relative"></span>
                                 </div>
 
                                 <div className="">
-                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['202'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Overnight'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <img src="timings/late_night.svg" alt="" /> </span>
+                                    <span className="cursor-pointer row-start-1 col-start-1 w-fit relative left-1/2 -translate-x-1/2 bg-[#121212] px-4 z-[2] before:content-['202'] before:text-[#f67373] before:absolute before:p-2 before:left-1/2 before:-translate-x-1/2 before:top-[100%] hover:after:content-['Overnight'] hover:after:absolute hover:after:p-2 hover:after:left-1/2 hover:after:-translate-x-1/2 hover:after:top-[-150%]  after:opacity-0 hover:after:opacity-100 after:duration-500 after:text-xs after:transition-opacity"> <LateNightSvg/> </span>
                                     <span className="row-start-1 col-start-1 border-t-[1.5px] w-1/2  border-[#fff3] relative"></span>
                                 </div>
                             </div>

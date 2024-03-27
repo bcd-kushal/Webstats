@@ -37,7 +37,7 @@ export async function MonthlyViews({data}: {data:number[]}) {
             </div>
 
             <div className="relative overflow-x-scroll pl-[6px] md:pl-2 flex gap-2 md:gap-3 items-center justify-start scrollbar-hide">
-                {VIEWS.map((view, index) => (<span className="py-2 px-4 bg-[#0007] whitespace-nowrap rounded-lg hover:text-[#f67373] hover:bg-[#f6737311] transition-colors cursor-default duration-300">{MONTHS[index]}: {view}</span>))}
+                {VIEWS.map((view, index) => (<span className="py-2 px-4 bg-[#0007] whitespace-nowrap rounded-lg hover:text-[#f67373] hover:bg-[#f6737311] transition-colors cursor-default duration-300" key={index}>{MONTHS[index]}: {view}</span>))}
             </div>
         </div>
     )

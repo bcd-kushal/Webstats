@@ -1,4 +1,4 @@
-.active-aside {
+.active-aside, .active-aside:hover {
   background: #f6737365;
 }
 .active-aside span:nth-child(2) {
