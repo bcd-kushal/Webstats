@@ -1,5 +1,4 @@
 import { TimeSlotType, HighlightDataProps, DataProps, CleanDataType } from "@/types/types"
-import { MONTHS } from "@/data/months"
 
 async function getTimeslot(timestr:string):Promise<TimeSlotType> {
     /*  morning     06-12           evening     12-19
@@ -13,6 +12,9 @@ async function getTimeslot(timestr:string):Promise<TimeSlotType> {
 
 
 export const getUsefulFormattedData = async (data:DataProps[]): Promise<HighlightDataProps> => {
+
+    const MONTHS = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+
     let cityCount:CleanDataType     = {},
         countryCount:CleanDataType  = {},
         browserCount:CleanDataType  = {},
@@ -20,12 +22,12 @@ export const getUsefulFormattedData = async (data:DataProps[]): Promise<Highligh
         dateCount:CleanDataType     = {},
         platformCount:CleanDataType = {}
 
-    let monthsViews = [0,0,0, 0,0,0, 0,0,0, 0,0,0]
+    let monthsViews:number[] = [0,0,0, 0,0,0, 0,0,0, 0,0,0]
 
     for(let i=0;i<data.length;i++) {
 
         // count monthly views =======================================
-        const month = data[i]['date'].substr(3,3)
+        const month = data[i]['date'].substring(3,6)
         if(MONTHS.includes(month))
             monthsViews[MONTHS.indexOf(month)] += 1
 
