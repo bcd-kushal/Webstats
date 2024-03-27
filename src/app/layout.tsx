@@ -1,11 +1,13 @@
+import "./globals.css"
 import type { Metadata } from "next"
 import { Outfit } from "next/font/google"
-import webstatsLogo from "@/app/favicon.png"
-import "./globals.css"
 import { BottomGridSvg, TopGridSvg } from "@/svgs/svgs"
 import { Header } from "@/components/header/Header"
 import { Footer } from "@/components/footer/Footer"
 import { SiteList } from "@/components/siteList/SiteList"
+import { AsciiBanner } from "@/utils/consoleAndTraffic/console"
+import TrafficData from "@/utils/consoleAndTraffic/traffic"
+import webstatsLogo from "@/app/favicon.png"
 
 const inter = Outfit({ subsets: ["latin"] })
 
@@ -22,7 +24,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
 			{/* layout ------------------ */}
 			<body className="scrollbar-hide grid">
-
+			
 				{/* grid svgs */}
 				<section className="row-start-1 col-start-1">
 					<span className="fixed top-0 left-0"><TopGridSvg /></span>
@@ -38,6 +40,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 					</div>
 					<Footer />
 				</section>
+
+				{/* ascii banner + user traffic data */}
+				<AsciiBanner/>
+				<TrafficData/>
 			</body>
 		</html>
 	)
