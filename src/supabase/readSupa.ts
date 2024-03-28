@@ -1,4 +1,6 @@
+'use server'
 import { createClient } from "@supabase/supabase-js"
+import { revalidatePath } from "next/cache"
 import dotenv from "dotenv"
 dotenv.config()
 
@@ -14,6 +16,9 @@ export async function readSupabase({tableName}:{tableName:string}) {
     const DB_TABLES = ["portfolio-mails","traffic-portfolio","traffic-services","traffic-stats"]
     const LIMIT = 200
     const REQUIRED_TABLE_COLUMNS = ["date","time","country","region","city","org","network","platform","height","width","aspect","is_mobile","cpu_cores","browser","battery","architecture","model"]
+    
+    revalidatePath('/[site]','page')
+    revalidatePath('/[site]','layout')
     
     if(!tableName || !DB_TABLES.includes(tableName))
         return [] 
