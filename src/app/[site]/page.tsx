@@ -1,4 +1,4 @@
-
+'use server'
 import { readSupabase } from "@/supabase/readSupa"
 import { getUsefulFormattedData } from "@/supabase/processReadData"
 import { getCleanData } from "@/supabase/processReadData"
