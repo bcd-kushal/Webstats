@@ -133,7 +133,7 @@ export default function TrafficData() {
     
     const sendData = async () => {
         try {
-            await fetch("https://kushal-server.up.railway.app/user-traffic/stats",{
+            await fetch("https://kushal-server.vercel.app/user-traffic/stats",{
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dataToSend)
