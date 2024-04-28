@@ -8,7 +8,7 @@
 
 https://stats.kushalkumarsaha.com/
 
-Webstats showcases user traffic data to any specific website. 
+Webstats showcases user traffic data to any specific website. It uses JS API endpoints and does not read senstitive user data. 
 
 <hr>
 
