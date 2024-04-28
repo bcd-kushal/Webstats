@@ -7,3 +7,15 @@
 <img style="height:25px" src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png"/> &nbsp;
 
 https://stats.kushalkumarsaha.com/
+
+Webstats showcases user traffic data to any specific website. 
+
+<hr>
+
+## ⚖️ License
+
+This project is licensed under the MIT License - see the <a href=''>LICENSE</a> file for details.
+
+<hr>
+
+<h3><img title="Kushal-Kumar" width="18" src="https://raw.githubusercontent.com/bcd-kushal/bcd-kushal/main/assets/icons/dark/filled/kushalkumar_bg_dark.png"/>&nbsp;Kushal Kumar 2024 • All rights reserved </h3>
